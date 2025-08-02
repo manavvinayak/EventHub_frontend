@@ -32,15 +32,56 @@ const handleResponse = async (response) => {
 }
 
 export const getEvents = async (filters = {}) => {
-  const queryParams = new URLSearchParams(filters).toString()
-  const url = queryParams ? `${API_BASE_URL}?${queryParams}` : API_BASE_URL
-  const response = await fetch(url)
-  return handleResponse(response)
+  try {
+    const queryParams = new URLSearchParams(filters).toString()
+    const url = queryParams ? `${API_BASE_URL}?${queryParams}` : API_BASE_URL
+    
+    console.log("Fetching events from URL:", url)
+    console.log("Using filters:", filters)
+    
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // Include for consistency
+    })
+    
+    console.log("Events response status:", response.status)
+    console.log("Events response headers:", [...response.headers.entries()])
+    
+    const result = await handleResponse(response)
+    console.log("Events fetched successfully:", result?.length || 0, "events")
+    
+    return result
+  } catch (error) {
+    console.error("getEvents error:", error)
+    throw error
+  }
 }
 
 export const getEventById = async (id) => {
-  const response = await fetch(`${API_BASE_URL}/${id}`)
-  return handleResponse(response)
+  try {
+    console.log("Fetching event by ID:", id)
+    
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    })
+    
+    console.log("Event by ID response status:", response.status)
+    
+    const result = await handleResponse(response)
+    console.log("Event fetched successfully:", result)
+    
+    return result
+  } catch (error) {
+    console.error("getEventById error:", error)
+    throw error
+  }
 }
 
 export const createEvent = async (eventData) => {

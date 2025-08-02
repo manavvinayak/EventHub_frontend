@@ -19,11 +19,31 @@ function EventsPage() {
   const fetchAllEvents = async (currentFilters) => {
     try {
       setLoading(true)
+      setError(null) // Clear previous errors
+      
+      console.log("EventsPage: Fetching events with filters:", currentFilters)
+      
       const data = await getEvents(currentFilters)
-      setEvents(data)
+      console.log("EventsPage: Events received:", data)
+      
+      setEvents(data || []) // Ensure it's always an array
     } catch (err) {
-      setError(err.message || "Failed to load events.")
-      console.error("Error fetching events:", err)
+      console.error("EventsPage: Error fetching events:", err)
+      
+      // Provide more specific error messages
+      let errorMessage = "Failed to load events."
+      
+      if (err.message.includes("fetch")) {
+        errorMessage = "Cannot connect to server. Please check if the backend is running on http://localhost:5000"
+      } else if (err.message.includes("HTML")) {
+        errorMessage = "Server error: API endpoint not found. Please check server configuration."
+      } else if (err.message.includes("JSON")) {
+        errorMessage = "Server returned invalid data. Please check server logs."
+      } else if (err.message) {
+        errorMessage = err.message
+      }
+      
+      setError(errorMessage)
     } finally {
       setLoading(false)
     }
