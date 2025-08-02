@@ -1,55 +1,47 @@
-const API_BASE_URL = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/auth`
-
+// Update your handleResponse function with better error handling
 const handleResponse = async (response) => {
-  if (!response.ok) {
-    const errorData = await response.json()
-    throw new Error(errorData.message || "Something went wrong")
+  try {
+    // First get the raw text
+    const text = await response.text();
+    
+    // Check if response is empty
+    if (!text) {
+      throw new Error("Server returned an empty response");
+    }
+    
+    // Try to parse JSON
+    const data = JSON.parse(text);
+    
+    // Handle non-200 responses
+    if (!response.ok) {
+      throw new Error(data.message || "Something went wrong");
+    }
+    
+    return data;
+  } catch (e) {
+    console.error("Response error:", e);
+    console.log("Response status:", response.status);
+    console.log("Response headers:", [...response.headers.entries()]);
+    throw new Error(e.message || "Invalid response from server");
   }
-  return response.json()
-}
-
-export const signup = async (userData) => {
-  const response = await fetch(`${API_BASE_URL}/signup`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include", 
-    body: JSON.stringify(userData),
-  })
-  return handleResponse(response)
 }
 
 export const login = async (credentials) => {
-  const response = await fetch(`${API_BASE_URL}/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify(credentials),
-  })
-  return handleResponse(response)
-}
-
-export const logout = async () => {
-  const response = await fetch(`${API_BASE_URL}/logout`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include", 
-  })
-  return handleResponse(response)
-}
-
-export const getProfile = async () => {
-  const response = await fetch(`${API_BASE_URL}/profile`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include", 
-  })
-  return handleResponse(response)
+  try {
+    console.log("Sending login request to:", API_BASE_URL);
+    
+    const response = await fetch(`${API_BASE_URL}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(credentials),
+    });
+    
+    return handleResponse(response);
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
+  }
 }
