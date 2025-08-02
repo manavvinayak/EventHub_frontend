@@ -1,5 +1,4 @@
-const API_BASE_URL = "http://localhost:5000/api/registrations"
-
+const API_BASE_URL = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/registrations`
 const handleResponse = async (response) => {
   if (!response.ok) {
     const errorData = await response.json()
