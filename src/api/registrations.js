@@ -1,4 +1,4 @@
-const API_BASE_URL = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/registrations`
+const API_BASE_URL = `${import.meta.env.VITE_API_URL || "https://eventhub-backend-7iln.onrender.com"}/api/registrations`
 const handleResponse = async (response) => {
   try {
     const text = await response.text();

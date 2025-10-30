@@ -4,13 +4,13 @@ const testAPI = async () => {
     console.log("Testing API connectivity...")
     
     // Test 1: Basic health check
-    const healthResponse = await fetch("http://localhost:5000/api/health")
+    const healthResponse = await fetch("https://eventhub-backend-7iln.onrender.com/api/health")
     console.log("Health check status:", healthResponse.status)
     const healthData = await healthResponse.json()
     console.log("Health data:", healthData)
     
     // Test 2: Events endpoint
-    const eventsResponse = await fetch("http://localhost:5000/api/events", {
+    const eventsResponse = await fetch("https://eventhub-backend-7iln.onrender.com/api/events", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
