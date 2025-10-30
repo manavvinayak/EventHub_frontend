@@ -1,26 +1,20 @@
-// API base URL
+
 const API_BASE_URL = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/auth`
 
-// Update your handleResponse function with better error handling
 const handleResponse = async (response) => {
   try {
-    // First get the raw text
     const text = await response.text();
     
-    // Check if response is empty
     if (!text) {
       throw new Error(`Server returned an empty response. Status: ${response.status}`);
     }
     
-    // Check if it's HTML (error page)
     if (text.startsWith('<!DOCTYPE') || text.startsWith('<html')) {
       throw new Error(`Server returned HTML instead of JSON. Status: ${response.status}. URL: ${response.url}. This usually means the API endpoint was not found.`);
     }
     
-    // Try to parse JSON
     const data = JSON.parse(text);
     
-    // Handle non-200 responses
     if (!response.ok) {
       throw new Error(data.message || `HTTP ${response.status}: ${response.statusText}`);
     }
@@ -50,7 +44,7 @@ export const login = async (credentials) => {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include", // This is crucial for cookies
+      credentials: "include", 
       body: JSON.stringify(credentials),
     });
     
