@@ -18,9 +18,38 @@ function HomePage() {
     const fetchUpcomingEvents = async () => {
       try {
         setLoading(true)
-        const today = new Date().toISOString().split("T")[0]
-        const events = await getEvents({ date: today })
-        setUpcomingEvents(events.filter((event) => new Date(event.date) >= new Date(today)))
+        const events = await getEvents({})
+        
+        // Upcoming events flow
+        const now = new Date()
+        const upcomingOnly = events.filter((event) => {
+          try {
+            // Get the date part (YYYY-MM-DD format)
+            const eventDate = event.date.split('T')[0] 
+            
+            
+            let eventTime = event.time
+            
+           
+            const [time, period] = eventTime.split(' ')
+            let [hours, minutes] = time.split(':').map(Number)
+            
+            if (period === 'PM' && hours !== 12) hours += 12
+            if (period === 'AM' && hours === 12) hours = 0
+            
+           
+            const eventDateTime = new Date(eventDate)
+            eventDateTime.setHours(hours, minutes, 0, 0)
+            
+            return eventDateTime > now
+          } catch (error) {
+            console.error('Error parsing event datetime:', error, event)
+           
+            return true
+          }
+        })
+        
+        setUpcomingEvents(upcomingOnly)
       } catch (err) {
         setError("Failed to load upcoming events. Please try again later.")
         addToast("Failed to load upcoming events.", "error") 

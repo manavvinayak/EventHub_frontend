@@ -5,12 +5,14 @@ import { useParams, useNavigate } from "react-router-dom"
 import { getEventById } from "../api/events.js"
 import { registerForEvent, getUserRegistrations } from "../api/registrations.js" // Import getUserRegistrations
 import { useAuth } from "../App.jsx"
+import { useToast } from "../contexts/ToastContext.jsx"
 import Loader from "../components/Loader.jsx"
 
 function EventDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { user } = useAuth()
+  const { addToast } = useToast()
   const [event, setEvent] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -49,11 +51,25 @@ function EventDetailsPage() {
     }
 
     try {
-      await registerForEvent(event._id)
-      setRegistrationMessage("Success! Your ticket has been generated. Check your dashboard!")
-      setIsRegistered(true) 
+      const response = await registerForEvent(event._id)
+      
+      // Success message
+      setRegistrationMessage("🎉 Success! Your ticket has been generated.")
+      setIsRegistered(true)
+      
+      // Show toast notification about email
+      if (response.emailSent) {
+        addToast(
+          `📧 Confirmation email sent! Check your inbox for event details and updates.`,
+          "success"
+        )
+      } else {
+        addToast("Registration successful! Check your dashboard for event details.", "success")
+      }
+      
     } catch (err) {
       setRegistrationMessage(err.message || "Failed to get ticket for the event.")
+      addToast(err.message || "Registration failed. Please try again.", "error")
       console.error("Error registering:", err)
     } finally {
       setTimeout(() => setRegistrationMessage(null), 3000)
