@@ -121,6 +121,58 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Practice Interview Banner */}
+      <section className="py-8">
+        <div className="container mx-auto px-4">
+          <div className="relative group">
+            <a 
+              href="https://hackcbs-client.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block relative overflow-hidden"
+            >
+              <div className="bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-600 rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 group-hover:bg-gradient-to-r group-hover:from-purple-700 group-hover:via-purple-800 group-hover:to-indigo-700">
+                {/* Animated background elements */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-indigo-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute top-4 right-4 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse"></div>
+                <div className="absolute bottom-4 left-4 w-20 h-20 bg-white/5 rounded-full blur-lg animate-bounce delay-75"></div>
+                
+                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between">
+                  <div className="text-center md:text-left mb-4 md:mb-0">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 animate-fade-in">
+                      🚀 Try Practice Interview
+                    </h3>
+                    <p className="text-purple-100 text-sm md:text-base max-w-md">
+                      Sharpen your interview skills with our AI-powered practice sessions. Get ready for your dream job!
+                    </p>
+                  </div>
+                  
+                  <div className="flex items-center space-x-2 text-white group-hover:translate-x-2 transition-transform duration-300">
+                    <span className="text-lg font-semibold">Get Started</span>
+                    <svg 
+                      className="w-6 h-6 animate-bounce" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth="2" 
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 skew-x-12"></div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_70%)]"></div>
         
