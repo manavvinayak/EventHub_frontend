@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { signup, login } from "../api/auth.js"
+import { testConnection, testSignupEndpoint, checkEnvironment } from "../api/test.js"
 import { useAuth } from "../App.jsx" // Import useAuth from App.jsx
 
 function AuthPage({ isSignUp = false }) {
@@ -12,26 +13,85 @@ function AuthPage({ isSignUp = false }) {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [showDebug, setShowDebug] = useState(false)
   const navigate = useNavigate()
   const { setUser } = useAuth() // Get setUser from AuthContext
 
+  // Debug function to test API connectivity
+  const handleDebugTest = async () => {
+    console.log("🔧 Starting debug tests...")
+    
+    // Check environment
+    const envConfig = checkEnvironment()
+    
+    // Test basic connectivity
+    const healthTest = await testConnection()
+    
+    // Test signup endpoint
+    const signupTest = await testSignupEndpoint()
+    
+    setError(`Debug Results:
+📊 Environment: ${envConfig.mode}
+🔗 API URL: ${envConfig.resolvedApiUrl}
+💓 Health Check: ${healthTest.success ? "✅ Pass" : "❌ Fail"}
+🔐 Signup Test: ${signupTest.success ? "✅ Pass" : "❌ Fail"}
+${!healthTest.success ? `Health Error: ${healthTest.error}` : ''}
+${!signupTest.success ? `Signup Error: ${signupTest.error}` : ''}`)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // Prevent double submission
+    if (isLoading) return
+    
     setError("")
     setSuccess("")
 
-    if (isSignUp && password !== confirmPassword) {
-      setError("Passwords do not match")
-      return
+    // Validate inputs
+    const trimmedUsername = username.trim()
+    const trimmedEmail = email.trim().toLowerCase()
+    const trimmedPassword = password.trim()
+
+    if (isSignUp) {
+      if (!trimmedUsername || !trimmedEmail || !trimmedPassword) {
+        setError("Please fill in all required fields")
+        return
+      }
+
+      if (trimmedUsername.length < 3) {
+        setError("Username must be at least 3 characters long")
+        return
+      }
+
+      if (trimmedPassword.length < 6) {
+        setError("Password must be at least 6 characters long")
+        return
+      }
+
+      if (trimmedPassword !== confirmPassword.trim()) {
+        setError("Passwords do not match")
+        return
+      }
     }
+
+    setIsLoading(true)
 
     try {
       let userData
       if (isSignUp) {
-        userData = await signup({ username, email, password })
+        userData = await signup({ 
+          username: trimmedUsername, 
+          email: trimmedEmail, 
+          password: trimmedPassword 
+        })
         setSuccess("Sign up successful! Redirecting to dashboard...")
       } else {
-        userData = await login({ email, password })
+        userData = await login({ 
+          email: trimmedEmail, 
+          password: trimmedPassword 
+        })
         setSuccess("Login successful! Redirecting to dashboard...")
       }
       setUser(userData) // Update user context
@@ -41,6 +101,8 @@ function AuthPage({ isSignUp = false }) {
     } catch (err) {
       setError(err.message || "An error occurred. Please try again.")
       console.error("Auth error:", err)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -54,7 +116,7 @@ function AuthPage({ isSignUp = false }) {
           {isSignUp && (
             <div>
               <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">
-                Username
+                Username (minimum 3 characters)
               </label>
               <input
                 type="text"
@@ -62,6 +124,7 @@ function AuthPage({ isSignUp = false }) {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                minLength={3}
                 required
               />
             </div>
@@ -81,7 +144,7 @@ function AuthPage({ isSignUp = false }) {
           </div>
           <div>
             <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
-              Password
+              Password {isSignUp && "(minimum 6 characters)"}
             </label>
             <input
               type="password"
@@ -89,6 +152,7 @@ function AuthPage({ isSignUp = false }) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              minLength={isSignUp ? 6 : undefined}
               required
             />
           </div>
@@ -109,9 +173,17 @@ function AuthPage({ isSignUp = false }) {
           )}
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transition-colors duration-300"
+            disabled={isLoading}
+            className={`${
+              isLoading 
+                ? "bg-gray-400 cursor-not-allowed" 
+                : "bg-blue-600 hover:bg-blue-700"
+            } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transition-colors duration-300`}
           >
-            {isSignUp ? "Sign Up" : "Login"}
+            {isLoading 
+              ? (isSignUp ? "Signing Up..." : "Logging In...") 
+              : (isSignUp ? "Sign Up" : "Login")
+            }
           </button>
         </form>
         <div className="mt-6 text-center">
@@ -130,6 +202,35 @@ function AuthPage({ isSignUp = false }) {
               </button>
             </p>
           )}
+          
+          {/* Debug Section - only show in development or when needed */}
+          <div className="mt-4 border-t pt-4">
+            <button
+              type="button"
+              onClick={() => setShowDebug(!showDebug)}
+              className="text-xs text-gray-400 hover:text-gray-600"
+            >
+              {showDebug ? "Hide" : "Show"} Debug Info
+            </button>
+            
+            {showDebug && (
+              <div className="mt-2 space-y-2">
+                <button
+                  type="button"
+                  onClick={handleDebugTest}
+                  className="bg-gray-500 hover:bg-gray-600 text-white text-xs py-1 px-3 rounded"
+                >
+                  Test API Connection
+                </button>
+                <div className="text-xs text-gray-500">
+                  API URL: {import.meta.env.VITE_API_URL || "https://eventhub-backend-7iln.onrender.com"}
+                </div>
+                <div className="text-xs text-gray-500">
+                  Environment: {import.meta.env.MODE}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
