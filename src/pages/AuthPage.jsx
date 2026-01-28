@@ -32,10 +32,9 @@ function AuthPage({ isSignUp = false }) {
     const signupTest = await testSignupEndpoint()
     
     setError(`Debug Results:
-📊 Environment: ${envConfig.mode}
-🔗 API URL: ${envConfig.resolvedApiUrl}
-💓 Health Check: ${healthTest.success ? "✅ Pass" : "❌ Fail"}
-🔐 Signup Test: ${signupTest.success ? "✅ Pass" : "❌ Fail"}
+ Environment: ${envConfig.mode}
+ API URL: ${envConfig.resolvedApiUrl}
+  Signup Test: ${signupTest.success ? "✅ Pass" : "❌ Fail"}
 ${!healthTest.success ? `Health Error: ${healthTest.error}` : ''}
 ${!signupTest.success ? `Signup Error: ${signupTest.error}` : ''}`)
   }
@@ -203,34 +202,7 @@ ${!signupTest.success ? `Signup Error: ${signupTest.error}` : ''}`)
             </p>
           )}
           
-          {/* Debug Section - only show in development or when needed */}
-          <div className="mt-4 border-t pt-4">
-            <button
-              type="button"
-              onClick={() => setShowDebug(!showDebug)}
-              className="text-xs text-gray-400 hover:text-gray-600"
-            >
-              {showDebug ? "Hide" : "Show"} Debug Info
-            </button>
-            
-            {showDebug && (
-              <div className="mt-2 space-y-2">
-                <button
-                  type="button"
-                  onClick={handleDebugTest}
-                  className="bg-gray-500 hover:bg-gray-600 text-white text-xs py-1 px-3 rounded"
-                >
-                  Test API Connection
-                </button>
-                <div className="text-xs text-gray-500">
-                  API URL: {import.meta.env.VITE_API_URL || "https://eventhub-backend-7iln.onrender.com"}
-                </div>
-                <div className="text-xs text-gray-500">
-                  Environment: {import.meta.env.MODE}
-                </div>
-              </div>
-            )}
-          </div>
+           
         </div>
       </div>
     </div>

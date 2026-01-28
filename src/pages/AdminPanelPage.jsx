@@ -164,9 +164,9 @@ function AdminPanelPage() {
       <style>{`
         /* Styles removed and using custom components now */
       `}</style>
-      <div className="min-h-[calc(100vh-160px)] bg-gradient-to-br from-gray-50 via-white to-blue-50 p-6">
+      <div className="min-h-[calc(100vh-160px)] bg-primary p-6">
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+        <h1 className="text-4xl font-extrabold text-cardBg-royal   mb-2">
           Admin Panel
         </h1>
         <p className="text-gray-600 text-lg">Manage events and monitor registrations</p>
@@ -394,7 +394,7 @@ function AdminPanelPage() {
           <div className="md:col-span-2 flex justify-end space-x-4 mt-8">
             <button
               type="submit"
-              className="group relative px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              className="group relative px-8 py-3 bg-button-purple text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
             >
               <span className="flex items-center">
                 {editingEventId ? (
@@ -542,7 +542,7 @@ function AdminPanelPage() {
                         </div>
                         
                         {/* Animated background effect */}
-                        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                        <div className="absolute inset-0 rounded-xl bg-button-purple opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                         
                         {/* Ripple effect */}
                         <div className="absolute inset-0 rounded-xl overflow-hidden">

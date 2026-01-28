@@ -19,7 +19,7 @@ function EventCard({ event }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
         
         <div className="absolute top-4 right-4">
-          <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-lg">
+          <span className="bg-cardBg-royal text-white text-xs font-semibold px-3 py-1 rounded-full shadow-lg">
             Featured
           </span>
         </div>
@@ -72,7 +72,7 @@ function EventCard({ event }) {
 
         <Link
           to={`/events/${event._id}`}
-          className="group/btn relative w-full inline-flex items-center justify-center px-6 py-3 text-white font-semibold rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+          className="group/btn relative w-full inline-flex items-center justify-center px-6 py-3 text-white font-semibold rounded-xl bg-button-purple   hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
         >
           <span className="flex items-center">
             View Details
@@ -81,7 +81,7 @@ function EventCard({ event }) {
             </svg>
           </span>
           
-          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 -z-10 blur-xl"></div>
+          <div className="absolute inset-0 rounded-xl bg-primary-light opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 -z-10 blur-xl"></div>
         </Link>
       </div>
     </div>

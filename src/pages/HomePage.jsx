@@ -73,10 +73,10 @@ function HomePage() {
 
   return (
     <div className="min-h-[calc(100vh-160px)]">
-      <section className="relative bg-primary-light py-16 md:py-24 overflow-hidden rounded-lg shadow-lg mb-12">
+      <section className="relative bg-accent-light py-16 md:py-24 overflow-hidden rounded-lg shadow-lg mb-12">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between relative z-10">
           <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
-            <h1 className="text-4xl md:text-6xl font-extrabold text-primary-dark leading-tight mb-6">
+            <h1 className="text-4xl md:text-6xl font-extrabold text-cardBg-royal leading-tight mb-6">
               Event planning <br /> made easier for <br /> everyone
             </h1>
             <p className="text-lg md:text-xl text-gray-700 max-w-lg mx-auto md:mx-0 mb-8">
@@ -178,7 +178,7 @@ function HomePage() {
         
         <div className="relative z-10 container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold  text-cardBg-royal bg-clip-text  mb-4">
               Our Features
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -192,7 +192,7 @@ function HomePage() {
               
               <div className="relative z-10">
                 <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-16 h-16 bg-primary-light rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <svg
                       className="h-8 w-8 text-white"
                       fill="none"
@@ -208,7 +208,7 @@ function HomePage() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-purple-600 transition-colors duration-300">
+                <h3 className="text-xl font-bold   mb-4  text-cardBg-purple">
                   Easy Event Discovery
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -278,7 +278,7 @@ function HomePage() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-pink-600 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-cardBg-purple mb-4 group-hover:text-pink-600 transition-colors duration-300">
                   Admin Event Management
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -293,7 +293,7 @@ function HomePage() {
       </section>
 
       <section className="py-12 bg-gray-50 rounded-lg shadow-md p-6 mt-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-8 text-center">Upcoming Events</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-cardBg-royal mb-8 text-center">Upcoming Events</h2>
         {loading && <p className="text-center text-gray-600">Loading events...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
         {!loading && upcomingEvents.length === 0 && !error && (

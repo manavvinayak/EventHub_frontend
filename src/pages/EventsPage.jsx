@@ -30,8 +30,7 @@ function EventsPage() {
     } catch (err) {
       console.error("EventsPage: Error fetching events:", err)
       
-      // Provide more specific error messages
-      let errorMessage = "Failed to load events."
+       let errorMessage = "Failed to load events "
       
       if (err.message.includes("fetch")) {
         errorMessage = "Cannot connect to server. Please check if the backend is running on http://localhost:5000"
@@ -69,13 +68,13 @@ function EventsPage() {
 
   return (
     <div className="min-h-[calc(100vh-160px)]">
-      <section className="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 py-16 overflow-hidden">
+      <section className="relative bg-primary-light   py-16 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_70%)]"></div>
         <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold text-cardBg-royal mb-4">
             Discover Amazing Events
           </h1>
-          <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Find the perfect events that match your interests and connect with your community
           </p>
         </div>
@@ -87,7 +86,7 @@ function EventsPage() {
         <div className="container mx-auto px-4">
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
             <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center mr-4">
+              <div className="w-12 h-12  bg-orange-300 rounded-xl flex items-center justify-center mr-4">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z" />
                 </svg>
@@ -179,7 +178,7 @@ function EventsPage() {
             <div className="flex justify-end">
               <button
                 onClick={handleClearFilters}
-                className="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center space-x-2"
+                className="bg-button-purple text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center space-x-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

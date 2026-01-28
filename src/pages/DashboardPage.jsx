@@ -48,29 +48,28 @@ function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-[calc(100vh-160px)] flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <div className="min-h-[calc(100vh-160px)] flex items-center justify-center bg-primary">
         <Loader size="xl" text="Loading your dashboard..." />
       </div>
     )
   }
 
   return (
-    <div className="min-h-[calc(100vh-160px)]">
+    <div className="min-h-[calc(100vh-160px)] bg-primary">
     
-      <section className="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_70%)]"></div>
-        <div className="relative z-10 container mx-auto px-4 text-center">
+      <section className="relative  py-16 overflow-hidden">
+         <div className="relative z-10 container mx-auto px-4 text-center">
           <div className="flex items-center justify-center mb-6">
             <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mr-6">
-              <span className="text-white text-3xl font-bold">
+              <span className="text-cardBg-royal text-3xl font-bold">
                 {user ? user.username.charAt(0).toUpperCase() : "U"}
               </span>
             </div>
             <div className="text-left">
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
-                Welcome back, {user ? user.username : "User"}!
+              <h1 className="text-4xl md:text-5xl font-bold text-cardBg-royal mb-2">
+                Hey, {user ? user.username : "User"}
               </h1>
-              <p className="text-xl text-blue-100">
+              <p className="text-xl text-gray-600">
                 Manage your event registrations and explore new opportunities
               </p>
             </div>
@@ -102,12 +101,12 @@ function DashboardPage() {
         </div>
       )}
 
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-primary">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300">
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-cardBg-royal rounded-xl flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                   </svg>
@@ -157,7 +156,7 @@ function DashboardPage() {
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="flex items-center mb-8">
-            <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center mr-4">
+            <div className="w-12 h-12 bg-cardBg-royal rounded-xl flex items-center justify-center mr-4">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
@@ -176,7 +175,7 @@ function DashboardPage() {
               <p className="text-gray-500 mb-6">You haven't registered for any events yet. Start exploring!</p>
               <a
                 href="/events"
-                className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 hover:scale-105 inline-block"
+                className="bg-button-purple text-white px-8 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 hover:scale-105 inline-block"
               >
                 Browse Events
               </a>

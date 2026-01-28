@@ -101,7 +101,7 @@ function EventDetailsPage() {
   })
 
   return (
-    <div className="min-h-[calc(100vh-160px)] p-4 flex justify-center">
+    <div className="min-h-[calc(100vh-160px)] p-4 flex justify-center bg-primary">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full text-gray-800">
         <img
           src={event.imageUrl || "/placeholder.svg?height=400&width=600&query=event-banner"}

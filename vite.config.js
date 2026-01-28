@@ -7,7 +7,8 @@ export default defineConfig({
     outDir: "dist", // Output build to a 'dist' folder
   },
   server: {
-    port: 3000, // Frontend will run on port 3000
+    port: 3000,  
+    host: true,
   },
    resolve: {
     alias: {
