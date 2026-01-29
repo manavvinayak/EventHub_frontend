@@ -1,31 +1,71 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    darkMode: ["class"],
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {
-      colors: {
-        primary: {
-          DEFAULT: "#fefce8", // A deep indigo/purple for main elements
-          dark: "#3730A3", // A darker shade for text/hover
-          light: "#fed7aa", // A very light shade for backgrounds
-        },
-        accent: {
-          DEFAULT: "#9D5088", // A vibrant purple
-          light: "#F4EBCE", // A lighter shade for accents
-        },
-        cardBg: {
-          amber: "#fffbeb",
-          royal: "#b97e50",
-          purple: "#9D5088",
-          green: "#F0FFF4", // Light green for service card
-          pink: "#FFF0F5", // Light pink for service card
-          brown: "#AF7839",
-        },
-        button: {
-          purple: "#835681",
-        }
-      },
-    },
+  	extend: {
+  		colors: {
+  			primary: {
+  				DEFAULT: 'hsl(var(--primary))',
+  				dark: '#3730A3',
+  				light: '#fed7aa',
+  				foreground: 'hsl(var(--primary-foreground))'
+  			},
+  			accent: {
+  				DEFAULT: 'hsl(var(--accent))',
+  				light: '#F4EBCE',
+  				foreground: 'hsl(var(--accent-foreground))'
+  			},
+  			cardBg: {
+  				amber: '#fffbeb',
+  				royal: '#b97e50',
+  				purple: '#9D5088',
+  				green: '#F0FFF4',
+  				pink: '#FFF0F5',
+  				brown: '#AF7839'
+  			},
+  			button: {
+  				purple: '#835681'
+  			},
+  			background: 'hsl(var(--background))',
+  			foreground: 'hsl(var(--foreground))',
+  			card: {
+  				DEFAULT: 'hsl(var(--card))',
+  				foreground: 'hsl(var(--card-foreground))'
+  			},
+  			popover: {
+  				DEFAULT: 'hsl(var(--popover))',
+  				foreground: 'hsl(var(--popover-foreground))'
+  			},
+  			secondary: {
+  				DEFAULT: 'hsl(var(--secondary))',
+  				foreground: 'hsl(var(--secondary-foreground))'
+  			},
+  			muted: {
+  				DEFAULT: 'hsl(var(--muted))',
+  				foreground: 'hsl(var(--muted-foreground))'
+  			},
+  			destructive: {
+  				DEFAULT: 'hsl(var(--destructive))',
+  				foreground: 'hsl(var(--destructive-foreground))'
+  			},
+  			border: 'hsl(var(--border))',
+  			input: 'hsl(var(--input))',
+  			ring: 'hsl(var(--ring))',
+  			chart: {
+  				'1': 'hsl(var(--chart-1))',
+  				'2': 'hsl(var(--chart-2))',
+  				'3': 'hsl(var(--chart-3))',
+  				'4': 'hsl(var(--chart-4))',
+  				'5': 'hsl(var(--chart-5))'
+  			}
+  		},
+  		borderRadius: {
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
+  		}
+  	}
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 }

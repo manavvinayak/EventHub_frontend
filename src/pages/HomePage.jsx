@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom"
 import EventCard from "../components/EventCard.jsx"
 import { getEvents } from "../api/events.js"
 import { useToast } from "../contexts/ToastContext.jsx" 
+import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card.jsx"
+import {CardStackDemo} from "./Review.jsx"
 
-function HomePage() {
+ function HomePage() {
   const [upcomingEvents, setUpcomingEvents] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -111,12 +113,28 @@ function HomePage() {
           </div>
 
           <div className="md:w-1/2 flex justify-center relative">
-            <img
-              src="https://www.onlinecoursereport.com/wp-content/uploads/2020/05/shutterstock_647550304-1024x737.jpg"
-              alt="Event Planning"
-              className="w-full max-w-xl rounded-lg shadow-xl"
-            />
-           
+            
+             <CardContainer className="inter-var">
+      <CardBody
+        className="bg-yellow-900 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+        
+        <CardItem translateZ="100" rotateX={20} rotateZ={-10} className="w-full mt-4">
+          <img
+            src="https://www.onlinecoursereport.com/wp-content/uploads/2020/05/shutterstock_647550304-1024x737.jpg"
+            height="1000"
+            width="1000"
+            className="w-full max-w-xl rounded-lg shadow-xl"
+            alt="thumbnail" />
+        </CardItem>
+        
+      </CardBody>
+    </CardContainer>
+         
+
+ 
+    
+  
+ 
           </div>
         </div>
       </section>
@@ -305,6 +323,12 @@ function HomePage() {
           ))}
         </div>
       </section>
+      <div>
+       <section className="py-12 bg-primary-light rounded-lg shadow-md p-6 mt-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-cardBg-royal mb-8 text-center">Testimonials</h2>
+        <CardStackDemo/>
+      </section>
+      </div>
     </div>
   )
 }
